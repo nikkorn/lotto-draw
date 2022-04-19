@@ -1,0 +1,32 @@
+{
+  "name": "lotto-draw",
+  "version": "1.0.0",
+  "description": "Pick random objects from a lotto draw\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001bwinners randomly from a ticket-based lotto draw",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikkorn/lotto-draw.git"
+  },
+  "keywords": [
+    "lotto",
+    "draw",
+    "random",
+    "raffle",
+    "pick",
+    "winner"
+  ],
+  "author": "nikkorn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikkorn/lotto-draw/issues"
+  },
+  "homepage": "https://github.com/nikkorn/lotto-draw#readme",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
