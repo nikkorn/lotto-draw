@@ -1,11 +1,19 @@
 import { Participant } from "./Participant";
 
 /**
- * The options that can be supplied when drawing a winning ticket.
+ * The options that can be supplied when drawing a single winning ticket.
  */
 export type DrawOptions = {
     /** Whether the ticket is redrawable. This defaults to 'true'. */
     redrawable?: boolean;
+}
+
+/**
+ * The options that can be supplied when drawing multiple winning tickets.
+ */
+export type DrawMultipleOptions = DrawOptions & {
+    /** Whether duplicate entries of participants with multiple winning tickets should be removed from the result. */
+    unique?: boolean;
 }
 
 export class Lotto<TParticipant = any> {
@@ -13,22 +21,30 @@ export class Lotto<TParticipant = any> {
     private _participants: Participant<TParticipant>[] = []; 
 
     /**
-     * 
+     * Adds a participant with the specified number of tickets.
      * @param participant 
-     * @param tickets 
-     * @returns 
+     * @param tickets The number of tickets, defaults to 1.
+     * @returns The Lotto instance.
      */
     public add(participant: TParticipant, tickets: number = 1): Lotto {
-        // TODO Eventually we should check whether this participant already holds tickets and simply add tickets to their count.
-        this._participants.push(new Participant(participant, tickets));
+        // Check whether this participant has already ben added.
+        const existingParticipant = this._participants.find((part) => part.participant === participant);
+
+        if (existingParticipant) {
+            // The participant has already been added to the lotto so just add to their ticket count.
+            existingParticipant.tickets += tickets;
+        } else {
+            // The participant is not part of the lotto so we should add them.
+            this._participants.push(new Participant(participant, tickets));
+        }
 
         return this;
     }
 
     /**
-     * 
-     * @param options 
-     * @returns 
+     * Draw a winning ticket and return the participant that holds the ticket.
+     * @param options The draw options.
+     * @returns The participant that holds the winning ticket.
      */
     public draw(options?: DrawOptions): TParticipant | null {
         // If we have no participants then just return null.
@@ -49,11 +65,12 @@ export class Lotto<TParticipant = any> {
     }
 
     /**
-     * 
+     * Draws multiple winning tickets and return an array of the participants that hold the winning tickets.
      * @param options 
      * @returns 
      */
-     public drawMultiple(tickets: number, options?: DrawOptions): TParticipant[] {
+    public drawMultiple(tickets: number, options?: DrawOptions): TParticipant[] {
+        // TODO Should this array contian duplicates for participants with multiple winning tickets.
         return [];
     }
 }

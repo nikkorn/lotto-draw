@@ -18,11 +18,16 @@ export class Participant<TParticipant = any> {
         this._tickets = tickets;
     }
 
+    /** Gets the actual participant. */
     public get participant(): TParticipant {
         return this._participant;
     }
 
+    /** Gets or sets the number of tickets held by the participant. */
     public get tickets(): number {
         return this._tickets;
+    }
+    public set tickets(value: number) {
+        this._tickets = value;
     }
 }
