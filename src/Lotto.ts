@@ -27,7 +27,7 @@ export class Lotto<TParticipant = any> {
      * @param tickets The number of tickets, defaults to 1.
      * @returns The Lotto instance.
      */
-    public add(participant: TParticipant, tickets: number = 1): Lotto {
+    public add(participant: TParticipant, tickets: number = 1): Lotto<TParticipant> {
         // Check that we have a valid ticket count.
         if (!isNaturalNumber(tickets)) {
             throw new Error("tickets value must be a natural number");
@@ -53,7 +53,7 @@ export class Lotto<TParticipant = any> {
      * @param tickets The number of tickets to remove, or undefined if all tickets are to be removed.
      * @returns The Lotto instance.
      */
-    public remove(participant: TParticipant, tickets?: number): Lotto {
+    public remove(participant: TParticipant, tickets?: number): Lotto<TParticipant> {
         // Attempt to get the existing participant.
         const existingParticipant = this._participants.find((part) => part.participant === participant);
 
@@ -107,7 +107,7 @@ export class Lotto<TParticipant = any> {
         // Pick a winning participant.
         const winner = pickable[Math.floor(Math.random() * pickable.length)];
 
-        // If the ticket isn't redrawable then we should remove a ticket from the participant ticket count.
+        // If the ticket isn't redrawable then we should remove a ticket from the winning participants ticket count.
         if (!redrawable) {
             this.remove(winner, 1);
         }
