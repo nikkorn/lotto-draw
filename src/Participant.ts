@@ -1,7 +1,7 @@
 /**
  * A participant that holds a number of tickets.
  */
-export class Participant<TParticipant = any> {
+export class Participant<TParticipant> {
     /** The actual participant. */
     private _participant: TParticipant;
 

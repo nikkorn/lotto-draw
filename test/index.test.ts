@@ -2,13 +2,13 @@ import { createLotto } from "../src/index";
 
 describe('does a', () => {
     test('thing', () => {
-        // Getting wrong type here! Add should take/return its own participant type (TAddedParticipant)?
-        createLotto().add(3, 3).add(9, 3).draw();
+        // Draw return value typed as string.
+        createLotto<string>().add("", 3).add("", 3).draw();
 
-        // Draw return value typed as any as no initial participants added.
-        createLotto().draw();
+        // Draw return value typed as any as no type passed with call to createLotto.
+        createLotto().add(4, 3).add(6, 3).add("", 3).draw();
 
-        // Draw return value typed as number as no number participants added.
-        createLotto([[6, 4], [5, 4]]).draw();
+        // Draw return value typed as string as initial string participants added.
+        createLotto([["this", 4], ["that", 4]]).draw();
     });
 });
