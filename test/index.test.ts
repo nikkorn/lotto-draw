@@ -10,5 +10,8 @@ describe('does a', () => {
 
         // Draw return value typed as string as initial string participants added.
         createLotto([["this", 4], ["that", 4]]).draw();
+
+        // Draw return value typed as boolean as initial boolean participants provided as part of lotto options.
+        createLotto({ participants: [[true, 4], [false, 4]] }).draw();
     });
 });
