@@ -1,22 +1,16 @@
 import { createLotto } from "../src/index";
 
-describe('does a', () => {
-    test('thing', () => {
-        // Draw return value typed as string.
-        createLotto<string>().add("", 3).add("", 3).draw();
-
-        // Draw return value typed as any as no type passed with call to createLotto.
-        createLotto().add(4, 3).add(6, 3).add("", 3).draw();
-
-        // Draw return value typed as string as initial string participants added.
-        createLotto([["this", 4], ["that", 4]]).draw();
-
-        // Draw return value typed as boolean as initial boolean participants provided as part of lotto options.
-        createLotto({ participants: [[true, 4], [false, 4]] }).draw();
+describe("the 'createLotto' function returns a Lotto instance that", () => {
+    describe("optionally takes an array or initial participants as an argument and", () => {
+        // ...
     });
 
-    describe("can draw multiple winners", () => {
-        describe("and when the 'unique' draw option is", () => {
+    describe("optionally takes an options object and", () => {
+        // ...
+    });
+
+    describe("has a 'drawMultiple' function that", () => {
+        describe("when the 'unique' draw option is", () => {
             test("true will return an array of unique winning participants", () => {
                 const result = createLotto<string>().add("single", 1).drawMultiple(10, { unique: true });
 
@@ -37,7 +31,7 @@ describe('does a', () => {
             });
         });
 
-        describe("and handle cases where", () => {
+        describe("handles cases where", () => {
             test("a tokens value of zero was provided", () => {
                 const result = createLotto<string>().add("single", 1).drawMultiple(0);
         
@@ -58,17 +52,19 @@ describe('does a', () => {
         });
     });
 
-    describe("handles a single draw when", () => {
-        test("no participants exist", () => {
-            const result = createLotto<string>().draw();
-    
-            expect(result).toEqual(null);
+    describe("has a 'draw' function that", () => {
+        describe("draws and returns a winning participant when", () => {
+            test("a single participants exists", () => {
+                const result = createLotto<string>().add("single", 1).draw();
+        
+                expect(result).toEqual("single");
+            });
         });
 
-        test("a single participants exists", () => {
-            const result = createLotto<string>().add("single", 1).draw();
-    
-            expect(result).toEqual("single");
+        test("handles cases where no tickets exist", () => {
+            const result = createLotto<string>().drawMultiple(10);
+        
+            expect(result.length).toEqual(0);
         });
     });
 });
