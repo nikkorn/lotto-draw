@@ -133,7 +133,7 @@ export class Lotto<TParticipant> {
         }
 
         // Pick a winning participant.
-        const winner = pickable[Math.floor(Math.random() * pickable.length)];
+        const winner = pickable[Math.floor(random * pickable.length)];
 
         // If the ticket isn't redrawable then we should remove a ticket from the winning participants ticket count.
         if (!redrawable) {
