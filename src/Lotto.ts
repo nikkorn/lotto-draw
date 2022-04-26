@@ -19,7 +19,18 @@ export type DrawMultipleOptions = DrawOptions & {
 
 export class Lotto<TParticipant> {
     /** The array of participants that are holding tickets in the lotto. */
-    private _participants: Participant<TParticipant>[] = []; 
+    private _participants: Participant<TParticipant>[] = [];
+
+    /** The custom RNG to use in place of Math.random(). */
+    private readonly _customRandom: (() => number) | undefined;
+
+    /**
+     * Creates a new instance of Lotto.
+     * @param customRandom The custom RNG to use in place of Math.random().
+     */
+    public constructor(customRandom?: () => number) {
+        this._customRandom = customRandom;
+    }
 
     /**
      * Adds a participant with the specified number of tickets, or adds to the participant ticket count if the participant already holds tickets.
@@ -103,6 +114,23 @@ export class Lotto<TParticipant> {
                 pickable.push(participant);
             }
         });
+
+        let random: number;
+
+        // We need a random floating-point number between 0 (inclusive) and 1 to scale up to pick our winner.
+        // If a custom random function exists then we should use that or fall back to Math.random().
+        if (this._customRandom) {
+            // Call our custom random function to get a random floating-point number.
+            random = this._customRandom();
+
+            // Verify that the result of calling our custom random function is a number between 0 (inclusive) and 1.
+            if (typeof random !== "number" || random < 0 || random >= 1) {
+                throw new Error("the 'random' function provided did not return a number between 0 (inclusive) and 1");
+            }
+        } else {
+            // No custom random function was defined so just use good ol' Math.random().
+            random = Math.random();
+        }
 
         // Pick a winning participant.
         const winner = pickable[Math.floor(Math.random() * pickable.length)];

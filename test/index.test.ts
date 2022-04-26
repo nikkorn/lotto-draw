@@ -21,8 +21,33 @@ describe("the 'createLotto' function", () => {
     });
 
     describe("optionally takes an options object and", () => {
-        test("if the 'random' property has a value of a function", () => {
-            // ...
+        test("if the 'random' property has a value of a function will use the function to source random numbers for participant draws", () => {
+            const randomNumbers: number[] = [];
+            let randomResultsToUse: number[]  = [];
+
+            while (randomNumbers.length < 50) {
+                randomNumbers.push(Math.random());
+            }
+
+            randomResultsToUse = [...randomNumbers];
+
+            const firstLotto = createLotto({
+                random: () => randomResultsToUse.pop() as number,
+                participants: [["A", 1], ["B", 1], ["C", 1], ["D", 1]]
+            });
+
+            const firstDrawResults = firstLotto.drawMultiple(50);
+
+            randomResultsToUse = [...randomNumbers];
+
+            const secondLotto = createLotto({
+                random: () => randomResultsToUse.pop() as number,
+                participants: [["A", 1], ["B", 1], ["C", 1], ["D", 1]]
+            });
+
+            const secondDrawResults = secondLotto.drawMultiple(50);
+
+            expect(firstDrawResults.join("-")).toEqual(secondDrawResults.join("-"));
         });
 
         test("if the 'participants' property has a value of an array of initial participants will add them to the Lotto instance", () => {
@@ -95,6 +120,17 @@ describe("the 'createLotto' function", () => {
                 const result = createLotto<string>().drawMultiple(10);
             
                 expect(result.length).toEqual(0);
+            });
+        });
+
+        describe("has an 'add' function that", () => {
+            
+            test("returns the lotto instance", () => {
+                const lotto = createLotto();
+
+                const result = lotto.add("", 1);
+            
+                expect(result).toEqual(lotto);
             });
         });
     });

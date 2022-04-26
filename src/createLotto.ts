@@ -18,12 +18,9 @@ export function createLotto<TParticipant = any>(participants?: ParticipantEntry<
 export function createLotto<TParticipant = any>(options?: LottoCreationOptions<TParticipant>): Lotto<TParticipant>;
 
 export function createLotto<TParticipant = any>(participantsOrOptions?: ParticipantEntry<TParticipant>[] | LottoCreationOptions<TParticipant>): Lotto<TParticipant> {
-    // Create the Lotto instace.
-    const lotto = new Lotto<TParticipant>();
-
-    // If no initial participants or lotto options were provided as an argument then we can just return the lotto instance now.
+    // If no initial participants or lotto options were provided as an argument then we can just return a new lotto instance now.
     if (!participantsOrOptions) {
-        return lotto;
+        return new Lotto<TParticipant>();
     }
 
     // Check whether we were provided with an array of initial participants or a lotto options object.
@@ -31,22 +28,26 @@ export function createLotto<TParticipant = any>(participantsOrOptions?: Particip
         // We are dealing with a pre-defined array of participants.
         const participants = participantsOrOptions;
 
+        const lotto = new Lotto<TParticipant>();
+
         // If the lotto participants have been defined upfront then we will need to add them all to our lotto instance now.
         participants.forEach(([participant, tokens]) => lotto.add(participant, tokens));
+
+        // Return the Lotto instance.
+        return lotto;
     } else {
         // We are dealing with some lotto options.
         const { random, participants } = participantsOrOptions;
+
+        // Create a Lotto instance passing the custom RNG function to use in place of Math.random() (which could be undefined).
+        const lotto = new Lotto<TParticipant>(random);
 
         // If the lotto participants have been defined upfront as part of the options then we will need to add them all to our lotto instance now.
         if (participants) {
             participants.forEach(([participant, tokens]) => lotto.add(participant, tokens));
         }
 
-        if (random) {
-            // TODO Handle random being set!
-        }
+        // Return the Lotto instance.
+        return lotto;
     }
-
-    // Return the Lotto instance.
-    return lotto;
 };
