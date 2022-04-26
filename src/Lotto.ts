@@ -17,7 +17,7 @@ export type DrawMultipleOptions = DrawOptions & {
     unique?: boolean;
 }
 
-export class Lotto<TParticipant = any> {
+export class Lotto<TParticipant> {
     /** The array of participants that are holding tickets in the lotto. */
     private _participants: Participant<TParticipant>[] = []; 
 
