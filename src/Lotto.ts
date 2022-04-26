@@ -125,12 +125,17 @@ export class Lotto<TParticipant = any> {
     public drawMultiple(tickets: number, options: DrawMultipleOptions = {}): TParticipant[] {
         const uniqueResults = isNullOrUndefined(options.unique) ? false : options.unique;
 
-        // Check that we have a valid tickets count.
+        // Handle cases where the user has asked for zero tickets (no idea why they would do this be we should trust them).
+        if (tickets === 0) {
+            return [];
+        }
+
+        // Now that we know out tickets value is not zero we should check that it is a valid natural number.
         if (!isNaturalNumber(tickets)) {
             throw new Error("tickets value must be a natural number");
         }
 
-        const result: TParticipant[] = [];
+        let result: TParticipant[] = [];
 
         while (result.length < tickets && this._participants.length > 0) {
             result.push(this.draw(options) as TParticipant);
@@ -138,7 +143,17 @@ export class Lotto<TParticipant = any> {
 
         // If the 'unique' draw option is set then we need to remove duplicates from the result list. 
         if (uniqueResults) {
-            // TODO Remove duplicates from the result list. 
+            // Create an array to store our unique results.
+            const unique: TParticipant[] = [];
+
+            // Iterate over all of our participants (with potential duplicates) and populate our array of unique values.
+            for (const participant of result) {
+                if (unique.indexOf(participant) === -1) {
+                    unique.push(participant);
+                }
+            }
+
+            result = unique;
         }
 
         return result;
