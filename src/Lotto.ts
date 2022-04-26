@@ -137,6 +137,8 @@ export class Lotto<TParticipant = any> {
 
         let result: TParticipant[] = [];
 
+        // Keep drawing tickets until we either reach the number of required tickets or we simply run out of tickets to draw.
+        // We can run out of tickets to draw if 'options.redrawable' is explicity 'false' or we just had no participants when 'drawMultiple' was called.
         while (result.length < tickets && this._participants.length > 0) {
             result.push(this.draw(options) as TParticipant);
         }
