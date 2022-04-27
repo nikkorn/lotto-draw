@@ -15,11 +15,14 @@
   },
   "keywords": [
     "lotto",
+    "lottery",
     "draw",
     "random",
     "raffle",
     "pick",
-    "winner"
+    "winner",
+    "weight",
+    "array"
   ],
   "author": "nikkorn",
   "license": "MIT",
