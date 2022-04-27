@@ -10,21 +10,20 @@ export type ParticipantEntry<TParticipant> = [TParticipant, number];
  */
 export type LottoCreationOptions<TParticipant> = {
     /** A function to return a pseudorandom number between 0 and 1. */
-    random?: () => number; 
+    random?: () => number;
 
     /** The initial lotto participants. */
     participants?: ParticipantEntry<TParticipant>[];
 };
-
-export function createLotto<TParticipant = any>(participants?: ParticipantEntry<TParticipant>[]): Lotto<TParticipant>;
-export function createLotto<TParticipant = any>(options?: LottoCreationOptions<TParticipant>): Lotto<TParticipant>;
 
 /**
  * A function that creates and returns a Lotto instance.
  * @param participantsOrOptions An array of initial participants or options relating to the creation of a Lotto instance.
  * @returns A new Lotto instance.
  */
-export function createLotto<TParticipant = any>(participantsOrOptions?: ParticipantEntry<TParticipant>[] | LottoCreationOptions<TParticipant>): Lotto<TParticipant> {
+export function createLotto<TParticipant = any>(
+    participantsOrOptions?: ParticipantEntry<TParticipant>[] | LottoCreationOptions<TParticipant>,
+): Lotto<TParticipant> {
     // If no initial participants or lotto options were provided as an argument then we can just return a new lotto instance now.
     if (!participantsOrOptions) {
         return new Lotto<TParticipant>();
@@ -57,4 +56,4 @@ export function createLotto<TParticipant = any>(participantsOrOptions?: Particip
         // Return the Lotto instance.
         return lotto;
     }
-};
+}

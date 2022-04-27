@@ -1,4 +1,3 @@
-
 /**
  * Gets whether the value provided is null or undefined.
  * @param value The value to check.

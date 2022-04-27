@@ -7,7 +7,7 @@ import { isNaturalNumber, isNullOrUndefined } from "./Utilities";
 export type DrawOptions = {
     /** Whether the ticket is redrawable. Defaults to 'true'. */
     redrawable?: boolean;
-}
+};
 
 /**
  * The options that can be supplied when drawing multiple winning tickets.
@@ -15,8 +15,11 @@ export type DrawOptions = {
 export type DrawMultipleOptions = DrawOptions & {
     /** Whether duplicate entries of participants with multiple winning tickets should be removed from the result. Defaults to 'false'. */
     unique?: boolean;
-}
+};
 
+/**
+ * Represents a lotto consisting of a number of pickable ticket-holding participants.
+ */
 export class Lotto<TParticipant> {
     /** The array of participants that are holding tickets in the lotto. */
     private _participants: Participant<TParticipant>[] = [];
@@ -171,7 +174,7 @@ export class Lotto<TParticipant> {
             result.push(this.draw(options) as TParticipant);
         }
 
-        // If the 'unique' draw option is set then we need to remove duplicates from the result list. 
+        // If the 'unique' draw option is set then we need to remove duplicates from the result list.
         if (uniqueResults) {
             // Create an array to store our unique results.
             const unique: TParticipant[] = [];
