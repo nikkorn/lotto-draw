@@ -1,4 +1,4 @@
-import { createLotto } from "../src/index";
+import createLotto from "../src/index";
 
 describe("the 'createLotto' function", () => {
     test("optionally takes an array of initial participants as an argument and will add them to the Lotto instance", () => {
