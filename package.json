@@ -1,9 +1,11 @@
 {
   "name": "lotto-draw",
-  "version": "1.0.0",
-  "description": "Pick random objects from a lotto draw\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001bwinners randomly from a ticket-based lotto draw",
+  "version": "1.0.1",
+  "description": "A simple tool used to pick random elements from a mutable collection of weighted participants",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/**/*"
+    "dist/*"
   ],
   "scripts": {
     "build": "tsc",
