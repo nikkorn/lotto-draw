@@ -97,7 +97,31 @@ The `createLotto` function can take an options object as an argument instead of 
 
 ## Using a custom `random` function
 
-While `lotto-tree` will use `Math.random` by default in picking participants when `draw` or `drawMultiple` is called, a custom random function can be provided as part of the `createLotto` options. This function must return a valid floating-point number between 0 (inclusive) and 1 (exclusive). This can be used to seed the random numbers used by `lotto-pick`.
+While `lotto-draw` will use `Math.random` by default in picking participants when `draw` or `drawMultiple` is called, a custom random function can be provided as part of the `createLotto` options. This function must return a valid floating-point number between 0 (inclusive) and 1 (exclusive). This can be used to seed the random numbers used by `lotto-draw`.
 
 ## Lotto Methods
 
+#### .add(participant, [tickets])
+
+Adds the given participant with the number of tickets speficied. If the number of tickets is not defined then it will default to one. If the participant has already been added to the lotto then the tickets will be added to their existing ticket count.
+
+#### .remove(participant, [tickets])
+
+Removes the specified number of tickets for the given participant. If the number of tickets is not defined then all tickets held by that participant will be removed.
+
+#### .draw([options])
+
+Draws a random ticket from the overall ticket pool and returns the ticket-holding participant, or null if no tickets exist.
+
+| Option          |Type | Description |
+| :--------------------|:- |:- |
+| redrawable   |boolean| Whether the ticket is redrawable. **Default: true** |
+
+#### .drawMultiple(tickets, [options])
+
+Draws the specified number of winning tickets and returns an array of the participants that hold the winning tickets.
+
+| Option          |Type | Description |
+| :--------------------|:- |:- |
+| redrawable   |boolean| Whether the tickets are redrawable. **Default: true** |
+| unique       |boolean| Whether duplicate entries of participants with multiple winning tickets should be removed from the result.  **Default: false** |
