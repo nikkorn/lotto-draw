@@ -1,6 +1,6 @@
 {
   "name": "lotto-draw",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple tool used to pick random elements from a mutable collection of weighted participants",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
