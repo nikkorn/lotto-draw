@@ -1,6 +1,6 @@
 # lotto-draw
 
-A simple tool used to pick random elements from a mutable collection of weighted participants, much like a lottery or raffle draw, writen in Typescript.
+A simple tool used to pick random elements from a mutable collection of weighted participants, much like a lottery or raffle draw, written in Typescript.
 
 ## Install
 
@@ -39,7 +39,7 @@ lotto.remove(ItemType.Common);
 
 ## Usage
 
-The 'createLotto' function returns a lotto instance which, by default, contains no drawable participants.
+The `createLotto` function returns a lotto instance which, by default, contains no drawable participants.
 
 ```ts
 import createLotto from "lotto-draw";
@@ -76,7 +76,7 @@ lotto = createLotto({
 });
 ```
 
-The 'draw' function will return a single winning participant, or null if there are no ticket-holding participants. The 'drawMultiple' function will take a number of tickets to draw and returns an array of winning participants, or an empty array if there are no ticket-holding participants.
+The `draw` function will return a single winning participant while the `drawMultiple` function will take a number of tickets to draw and returns an array of winning participants.
 
 ```ts
 import createLotto from "lotto-draw";
@@ -88,4 +88,16 @@ lotto.draw(); // result: "B"
 lotto.drawMultiple(5); // result: ["B", "C", "A", "B", "A"]
 ```
 
+The `createLotto` function can take an options object as an argument instead of an array of initial participants, the properties of which are shown below.
+
+| Option          |Type | Description |
+| :--------------------|:- |:- |
+| random        |() => number| A function returning a number between 0 (inclusive) and 1. |
+| participants  |[TParticipant, number][]| The array of initial lotto participants with their ticket counts.
+
+## Using a custom `random` function
+
+While `lotto-tree` will use `Math.random` by default in picking participants when `draw` or `drawMultiple` is called, a custom random function can be provided as part of the `createLotto` options. This function must return a valid floating-point number between 0 (inclusive) and 1 (exclusive). This can be used to seed the random numbers used by `lotto-pick`.
+
+## Lotto Methods
 
